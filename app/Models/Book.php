@@ -9,10 +9,10 @@ class Book extends Model
     protected $table = 'book';
 
     protected $fillable = [
-        'name', 'author_id','like'
+        'name', 'author_id'
     ];
     public function likes()
     {
-        return $this->morphMany(Like::class, 'type', 'type_id');
+        return $this->morphMany(Like::class,'likeable', 'type', 'type_id');
     }
 }

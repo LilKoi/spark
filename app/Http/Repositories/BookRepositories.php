@@ -11,10 +11,13 @@ class BookRepositories
         $this->model = $book;
     }
 
-    public function getRepBook($data = null)
+    public function getRepBook($data)
     { 
-        // if($data->sort){dd();}
-        $book = $this->model->with('likes')->get();
+        if($data->sort){
+            $book = $this->model->withCount('likes')->orderByDesc('likes_count')->get();    
+        }else{
+            $book = $this->model->get();
+        }
         return $book;   
     }
 }
