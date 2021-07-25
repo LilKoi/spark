@@ -3,7 +3,7 @@
         <input class="center" v-model='search' @input="findUsers()">
         <template v-if='users'>
             <section class="container">
-                <div class="row" v-infinite-scroll="getUsers" infinite-scroll-disabled="busy" infinite-scroll-distance="1">
+                <div class="row" v-infinite-scroll="nextPage" infinite-scroll-disabled="busy" infinite-scroll-distance="1">
                         <b-card
                         v-for="user in users"
                         :title="user.login"
@@ -46,6 +46,7 @@ import _ from "lodash"
                 _.debounce(
                 function() {
                     this.page = 1
+                    this.search = this.search
                     const data = {
                         search: this.search,
                         page: this.page 
@@ -54,17 +55,24 @@ import _ from "lodash"
                 }
                 ,1000),
             getUsers(){
-                this.page = this.page + 1
                 const data = {
                     search: this.search,
                     page: this.page 
                 }
                 const request = this.$store.dispatch('User/getUsers',data)
+            },
+            nextPage() {
+                this.page = this.page + 1
+                const data = {
+                    search: this.search,
+                    page: this.page 
+                }
+                const request = this.$store.dispatch('User/nextPage',data)
             }
         },
         computed: {
             users() {
-                return this.$store.getters['User/state']
+                return this.$store.getters['User/users']
             },
         },
         beforeMount() {

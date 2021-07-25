@@ -7,7 +7,7 @@
 export default {
     computed:{
         user() {
-            return this.$store.getters['User/user', this.$route.params.id]
+            return this.$store.getters['User/user'](this.$route.params.id)
         }
     }
 }
