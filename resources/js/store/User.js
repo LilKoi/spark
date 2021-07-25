@@ -8,8 +8,11 @@ export default {
     getters: {
         state: state =>{ return state.users},
         user: (state,id)=>{
+            
             console.log(id)
-            return state.users.find(userId => userId == id)}
+            let user = state.users.find(user => user.id == id);
+            return user;
+        }
     },
     mutations: {
         STORE_USERS(state, data) {
