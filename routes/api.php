@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\LikeController;
-
+use App\Http\Controllers\SearchController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,3 +24,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('author', AuthorController::class);
 Route::resource('book', BookController::class);
 Route::post("like", [LikeController::class, 'like']);
+Route::get('search',[SearchController::class, 'search']);
