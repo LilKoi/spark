@@ -18,8 +18,9 @@ class SearchController
 
     public function search(Request $request)
     {
-        $find = ['book','author'];
-        $find['book'] = $this->book->where('name','like', '%'.$request->search.'%');
-
+        $find = array('book','author');
+        $find['book'] = $this->book->where('name','like', '%'.$request->search.'%')->get();
+        $find['author'] = $this->author->where('name','like', '%'.$request->search.'%')->get();
+        return $find;
     }
 }
